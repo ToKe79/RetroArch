@@ -1662,6 +1662,13 @@
 #define DEFAULT_BUILDBOT_SERVER_URL ""
 #endif
 
+#ifdef HAVE_LAKKA_LIGHT
+#ifdef DEFAULT_BUILDBOT_SERVER_URL
+#undef DEFAULT_BUILDBOT_SERVER_URL
+#endif
+#define DEFAULT_BUILDBOT_SERVER_URL "http://nightly.builds.lakka.tv/.buildbot/" LAKKA_PLATFORM "/latest/"
+#endif
+
 #define DEFAULT_BUILDBOT_ASSETS_SERVER_URL "http://buildbot.libretro.com/assets/"
 
 #define DEFAULT_DISCORD_APP_ID "475456035851599874"

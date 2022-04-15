@@ -1072,6 +1072,15 @@ ifeq ($(HAVE_LAKKA_NIGHTLY), 1)
    DEFINES += -DHAVE_LAKKA_NIGHTLY
 endif
 
+ifeq ($(HAVE_LAKKA_LIGHT), 1)
+   DEFINES += -DHAVE_LAKKA_LIGHT
+   ifeq ($(LAKKA_PLATFORM),)
+      $(error Building Lakka-Light, but no LAKKA_PLATFORM given - set via LAKKA_PLATFORM=DEVICE.ARCH)
+   else
+      DEFINES += -DLAKKA_PLATFORM="\"$(LAKKA_PLATFORM)\""
+   endif
+endif
+
 ifeq ($(HAVE_MENU_COMMON), 1)
    OBJ += menu/menu_setting.o \
           menu/menu_driver.o \

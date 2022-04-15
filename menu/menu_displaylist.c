@@ -13412,6 +13412,110 @@ bool menu_displaylist_ctl(enum menu_displaylist_ctl_state type,
                      MENU_SETTING_ACTION, 0, 0, NULL))
                count++;
 
+#ifdef HAVE_LAKKA_LIGHT
+            if (settings->bools.menu_show_core_updater)
+            {
+               if (menu_entries_append_enum(info->list,
+                        msg_hash_to_str(MENU_ENUM_LABEL_VALUE_CORE_UPDATER_LIST),
+                        msg_hash_to_str(MENU_ENUM_LABEL_CORE_UPDATER_LIST),
+                        MENU_ENUM_LABEL_CORE_UPDATER_LIST,
+                        MENU_SETTING_ACTION, 0, 0))
+                  count++;
+
+               /* Only show 'update installed cores' if
+                * one or more cores are installed */
+               if (core_info_count() > 0)
+               {
+                     if (menu_entries_append_enum(info->list,
+                              msg_hash_to_str(MENU_ENUM_LABEL_VALUE_UPDATE_INSTALLED_CORES),
+                              msg_hash_to_str(MENU_ENUM_LABEL_UPDATE_INSTALLED_CORES),
+                              MENU_ENUM_LABEL_UPDATE_INSTALLED_CORES,
+                              MENU_SETTING_ACTION, 0, 0))
+                        count++;
+               }
+            }
+#if defined(HAVE_COMPRESSION)
+            if (menu_entries_append_enum(info->list,
+                     msg_hash_to_str(MENU_ENUM_LABEL_VALUE_DOWNLOAD_CORE_SYSTEM_FILES),
+                     msg_hash_to_str(MENU_ENUM_LABEL_DOWNLOAD_CORE_SYSTEM_FILES),
+                     MENU_ENUM_LABEL_DOWNLOAD_CORE_SYSTEM_FILES,
+                     MENU_SETTING_ACTION, 0, 0))
+               count++;
+            if (settings->bools.menu_show_core_updater)
+            {
+               if (menu_entries_append_enum(info->list,
+                        msg_hash_to_str(MENU_ENUM_LABEL_VALUE_UPDATE_CORE_INFO_FILES),
+                        msg_hash_to_str(MENU_ENUM_LABEL_UPDATE_CORE_INFO_FILES),
+                        MENU_ENUM_LABEL_UPDATE_CORE_INFO_FILES,
+                        MENU_SETTING_ACTION, 0, 0))
+                  count++;
+            }
+#ifdef HAVE_UPDATE_ASSETS
+            if (menu_entries_append_enum(info->list,
+                     msg_hash_to_str(MENU_ENUM_LABEL_VALUE_UPDATE_ASSETS),
+                     msg_hash_to_str(MENU_ENUM_LABEL_UPDATE_ASSETS),
+                     MENU_ENUM_LABEL_UPDATE_ASSETS,
+                     MENU_SETTING_ACTION, 0, 0))
+               count++;
+
+#endif
+            if (menu_entries_append_enum(info->list,
+                     msg_hash_to_str(MENU_ENUM_LABEL_VALUE_UPDATE_AUTOCONFIG_PROFILES),
+                     msg_hash_to_str(MENU_ENUM_LABEL_UPDATE_AUTOCONFIG_PROFILES),
+                     MENU_ENUM_LABEL_UPDATE_AUTOCONFIG_PROFILES,
+                     MENU_SETTING_ACTION, 0, 0))
+               count++;
+            if (menu_entries_append_enum(info->list,
+                     msg_hash_to_str(MENU_ENUM_LABEL_VALUE_UPDATE_CHEATS),
+                     msg_hash_to_str(MENU_ENUM_LABEL_UPDATE_CHEATS),
+                     MENU_ENUM_LABEL_UPDATE_CHEATS,
+                     MENU_SETTING_ACTION, 0, 0))
+               count++;
+#ifdef HAVE_LIBRETRODB
+            if (menu_entries_append_enum(info->list,
+                     msg_hash_to_str(MENU_ENUM_LABEL_VALUE_UPDATE_DATABASES),
+                     msg_hash_to_str(MENU_ENUM_LABEL_UPDATE_DATABASES),
+                     MENU_ENUM_LABEL_UPDATE_DATABASES,
+                     MENU_SETTING_ACTION, 0, 0))
+               count++;
+#endif
+            if (menu_entries_append_enum(info->list,
+                     msg_hash_to_str(MENU_ENUM_LABEL_VALUE_UPDATE_OVERLAYS),
+                     msg_hash_to_str(MENU_ENUM_LABEL_UPDATE_OVERLAYS),
+                     MENU_ENUM_LABEL_UPDATE_OVERLAYS,
+                     MENU_SETTING_ACTION, 0, 0))
+               count++;
+#if defined(HAVE_CG) || defined(HAVE_GLSL) || defined(HAVE_SLANG) || defined(HAVE_HLSL)
+            if (video_shader_is_supported(RARCH_SHADER_CG))
+            {
+               if (menu_entries_append_enum(info->list,
+                     msg_hash_to_str(MENU_ENUM_LABEL_VALUE_UPDATE_CG_SHADERS),
+                     msg_hash_to_str(MENU_ENUM_LABEL_UPDATE_CG_SHADERS),
+                     MENU_ENUM_LABEL_UPDATE_CG_SHADERS,
+                     MENU_SETTING_ACTION, 0, 0))
+                  count++;
+            }
+            if (video_shader_is_supported(RARCH_SHADER_GLSL))
+            {
+               if (menu_entries_append_enum(info->list,
+                        msg_hash_to_str(MENU_ENUM_LABEL_VALUE_UPDATE_GLSL_SHADERS),
+                        msg_hash_to_str(MENU_ENUM_LABEL_UPDATE_GLSL_SHADERS),
+                        MENU_ENUM_LABEL_UPDATE_GLSL_SHADERS,
+                        MENU_SETTING_ACTION, 0, 0))
+                  count++;
+            }
+            if (video_shader_is_supported(RARCH_SHADER_SLANG))
+            {
+               if (menu_entries_append_enum(info->list,
+                        msg_hash_to_str(MENU_ENUM_LABEL_VALUE_UPDATE_SLANG_SHADERS),
+                        msg_hash_to_str(MENU_ENUM_LABEL_UPDATE_SLANG_SHADERS),
+                        MENU_ENUM_LABEL_UPDATE_SLANG_SHADERS,
+                        MENU_SETTING_ACTION, 0, 0))
+                  count++;
+            }
+#endif
+#endif /* HAVE_COMPRESSION */
+#endif /* HAVE_LAKKA_LIGHT */
             if (settings->bools.menu_show_legacy_thumbnail_updater)
             {
                if (menu_entries_append(info->list,
