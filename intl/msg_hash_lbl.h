@@ -3548,6 +3548,12 @@ MSG_HASH(
    MENU_ENUM_LABEL_SAVE_CURRENT_CONFIG,
    "save_current_config"
    )
+#ifdef HAVE_LAKKA
+MSG_HASH(
+   MENU_ENUM_LABEL_SAVE_DEFAULT_CONFIG,
+   "save_default_config"
+   )
+#endif
 MSG_HASH(
    MENU_ENUM_LABEL_OVERRIDE_FILE_LOAD,
    "override_file_load"

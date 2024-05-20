@@ -4578,6 +4578,13 @@ bool command_event(enum event_command cmd, void *data)
          command_event_save_current_config(OVERRIDE_NONE);
 #endif
          break;
+#ifdef HAVE_LAKKA
+      case CMD_EVENT_MENU_SAVE_DEFAULT_CONFIG:
+#ifdef HAVE_CONFIGFILE
+         command_event_save_current_config(OVERRIDE_DEFAULT_RARCH_CFG);
+#endif
+         break;
+#endif
       case CMD_EVENT_MENU_SAVE_CURRENT_CONFIG_OVERRIDE_CORE:
 #ifdef HAVE_CONFIGFILE
          command_event_save_current_config(OVERRIDE_CORE);

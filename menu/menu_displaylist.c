@@ -10501,6 +10501,14 @@ unsigned menu_displaylist_build_list(
                   MENU_ENUM_LABEL_SAVE_CURRENT_CONFIG,
                   MENU_SETTING_ACTION, 0, 0, NULL))
             count++;
+#ifdef HAVE_LAKKA
+         if (menu_entries_append(list,
+                  msg_hash_to_str(MENU_ENUM_LABEL_VALUE_SAVE_DEFAULT_CONFIG),
+                  msg_hash_to_str(MENU_ENUM_LABEL_SAVE_DEFAULT_CONFIG),
+                  MENU_ENUM_LABEL_SAVE_DEFAULT_CONFIG,
+                  MENU_SETTING_ACTION, 0, 0, NULL))
+            count++;
+#endif
          if (menu_entries_append(list,
                   msg_hash_to_str(MENU_ENUM_LABEL_VALUE_SAVE_NEW_CONFIG),
                   msg_hash_to_str(MENU_ENUM_LABEL_SAVE_NEW_CONFIG),

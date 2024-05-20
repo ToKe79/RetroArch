@@ -1099,6 +1099,16 @@ MSG_HASH(
    MENU_ENUM_SUBLABEL_SAVE_CURRENT_CONFIG,
    "Overwrite current configuration file."
    )
+#ifdef HAVE_LAKKA
+MSG_HASH(
+   MENU_ENUM_LABEL_VALUE_SAVE_DEFAULT_CONFIG,
+   "Save To Default Configuration File"
+   )
+MSG_HASH(
+   MENU_ENUM_SUBLABEL_SAVE_DEFAULT_CONFIG,
+   "Overwrite default configuration file."
+   )
+#endif
 MSG_HASH(
    MENU_ENUM_LABEL_VALUE_SAVE_NEW_CONFIG,
    "Save New Configuration"

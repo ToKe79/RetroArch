@@ -43,6 +43,9 @@
 
 #ifdef HAVE_MENU
 #include "menu/menu_driver.h"
+#ifdef HAVE_LAKKA
+#include "file_path_special.h"
+#endif
 #endif
 
 #ifdef HAVE_NETWORKING
@@ -1856,6 +1859,40 @@ void command_event_save_current_config(enum override_type type)
             }
          }
          break;
+#ifdef HAVE_LAKKA
+      case OVERRIDE_DEFAULT_RARCH_CFG:
+         {
+            char msg[256];
+            msg[0] = '\0';
+            char conf_path[PATH_MAX_LENGTH];
+            char application_data[PATH_MAX_LENGTH] = {0};
+
+            if(!fill_pathname_application_data(application_data,
+                  sizeof(application_data)))
+               goto error_saving_to_default_config;
+
+            if(!fill_pathname_join_special(conf_path, application_data,
+                  FILE_PATH_MAIN_CONFIG, sizeof(conf_path)))
+               goto error_saving_to_default_config;
+
+            path_set(RARCH_PATH_CONFIG, conf_path);
+
+            if (path_is_empty(RARCH_PATH_CONFIG))
+               goto error_saving_to_default_config;
+
+            if (runloop_st->flags & RUNLOOP_FLAG_OVERRIDES_ACTIVE)
+               strlcpy(msg, msg_hash_to_str(MSG_OVERRIDES_ACTIVE_NOT_SAVING), sizeof(msg));
+            else
+               command_event_save_config(path_get(RARCH_PATH_CONFIG), msg, sizeof(msg));
+
+            runloop_msg_queue_push(msg, 1, 180, true, NULL, MESSAGE_QUEUE_ICON_DEFAULT, MESSAGE_QUEUE_CATEGORY_INFO);
+            break;
+error_saving_to_default_config:
+            strlcpy(msg, "Error saving to default configuration file.", sizeof(msg));
+            runloop_msg_queue_push(msg, 1, 180, true, NULL, MESSAGE_QUEUE_ICON_DEFAULT, MESSAGE_QUEUE_CATEGORY_ERROR);
+         }
+         break;
+#endif /* HAVE_LAKKA */
       case OVERRIDE_GAME:
       case OVERRIDE_CORE:
       case OVERRIDE_CONTENT_DIR:

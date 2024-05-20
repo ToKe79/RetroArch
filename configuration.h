@@ -85,7 +85,12 @@ enum override_type
    OVERRIDE_AS,
    OVERRIDE_CORE,
    OVERRIDE_CONTENT_DIR,
+#ifndef HAVE_LAKKA
    OVERRIDE_GAME
+#else
+   OVERRIDE_GAME,
+   OVERRIDE_DEFAULT_RARCH_CFG
+#endif
 };
 
 typedef struct settings
